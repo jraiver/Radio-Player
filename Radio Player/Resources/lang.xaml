@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
+    
+    <v:String x:Key="SearchVK">Search track in VK</v:String>
+    <v:String x:Key="Search">Search</v:String>
+    <v:String x:Key="SearchRadiostation">Search radiostation</v:String>
+    <v:String x:Key="SearchRadiostationTextBox">Enter the title radiostation</v:String>
+    <v:String x:Key="Delete">Delete</v:String>
+    <v:String x:Key="ToFavorite">To favorites</v:String>
+    <v:String x:Key="CantTrack">The definition of songs for this radio station is not available</v:String>
+    <v:String x:Key="SelectStation">Select radio station</v:String>
+    <v:String x:Key="SelectLang">Сhoose language</v:String>
+
+    <!--tab control-->
+    <v:String x:Key="tabFavorites">Favorites</v:String>
+    <v:String x:Key="tabAll">All</v:String>
+    <v:String x:Key="tabRock">Rock</v:String>
+    <v:String x:Key="tabClub">Club</v:String>
+    <v:String x:Key="tabDeepHouse">Deep House</v:String>
+    <v:String x:Key="tabShanson">Shanson</v:String>
+    <v:String x:Key="tabTrance">Trance</v:String>
+    <v:String x:Key="tabPop">Pop</v:String>
+    <v:String x:Key="tabRetro">Retro</v:String>
+    <v:String x:Key="tabRelax">Relax</v:String>
+    <v:String x:Key="tabRap">Rap</v:String>
+    <v:String x:Key="tabTalk">Talk</v:String>
+    <v:String x:Key="tabFolk">Folk</v:String>
+    <v:String x:Key="tabClassic">Classic</v:String>
+    <v:String x:Key="tabJazz">Jazz</v:String>
+    <v:String x:Key="tabBaby">Baby</v:String>
+
+    
+</ResourceDictionary>

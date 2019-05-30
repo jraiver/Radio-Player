@@ -1,0 +1,238 @@
+﻿<Controls:MetroWindow
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls" 
+                      mc:Ignorable="d" 
+                      x:Class="radio.MainWindow"
+                      Title="Radio"
+                      Height="658"
+                      Width="1086" WindowStartupLocation="CenterScreen" Background="White" MinWidth="1086" MinHeight="660">
+
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <controls:DropDownButton x:Name="ChangeLang" 
+                HorizontalAlignment="Left"   
+                FontSize="14" Padding="0" Cursor="Hand" Height="28"
+                 ArrowMouseOverBrush="{DynamicResource GeneralColor}" FontFamily="Segoe UI Light"  Background="White" 
+                Content="{DynamicResource SelectLang}" Margin="0,0,5,0" Foreground="{DynamicResource GeneralColor}" ArrowPressedBrush="{x:Null}" ArrowBrush="{x:Null}" BorderBrush="{x:Null}" 
+                >
+                <controls:DropDownButton.ItemTemplate>
+                    <DataTemplate>
+                        <Grid  Cursor="Hand" Background="{x:Null}">
+                            <TextBlock x:Name="ItemLang" Text="{Binding Header}" Foreground="{DynamicResource GeneralColor}"  />
+                        </Grid>
+                    </DataTemplate>
+                </controls:DropDownButton.ItemTemplate>
+            </controls:DropDownButton>
+
+            <Button x:Name="SearchButton" Content="{DynamicResource Search}" HorizontalAlignment="Left" Margin="0,2,5,0" 
+                    Width="76" Height="28" FontFamily="Segoe UI Light" FontSize="14" Padding="5,0" Foreground="{DynamicResource GeneralColor}"
+                    Background="White" BorderBrush="{x:Null}" PreviewMouseLeftButtonDown="OpenSearchPanel" Cursor="Hand" 
+                    Controls:ControlsHelper.FocusBorderBrush="{DynamicResource GeneralColor}"/>
+
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+
+    <Controls:MetroWindow.Resources>
+        <Color x:Key="themeColor">#FF21A5D6</Color>
+        <SolidColorBrush x:Key="GeneralColor" Color="#FF41B0E1"/>
+        <SolidColorBrush x:Key="GeneralColorOpacity" Color="#4C41B0E1"/>
+        <SolidColorBrush x:Key="FavoriteBackground" Color="#99C5C5C5"/>
+        <LinearGradientBrush x:Key="BottomGradient" EndPoint="0.5,4" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+            <GradientStop Color="#FFD6D6D6" Offset="1"/>
+            <GradientStop Color="White"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="BottomGradientRadio" EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0" Opacity="0.3">
+            <GradientStop Color="#4C41B0E1" Offset="0.76"/>
+            <GradientStop Color="White"/>
+        </LinearGradientBrush>
+
+    </Controls:MetroWindow.Resources>
+
+    <Grid x:Name="mainGrid">
+        <Grid x:Name="RadioGrid" >
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="92*"/>
+                <ColumnDefinition Width="443*"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="AllRadioGrid" PreviewMouseLeftButtonDown="AllRadioGrid_PreviewMouseLeftButtonDown" Margin="0,0,3,0" Grid.ColumnSpan="2">
+                <TabControl x:Name="MainTab" Margin="3,0,3,79" FontFamily="Segoe UI Light" BorderThickness="1" Padding="2" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Stretch" Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" IsSynchronizedWithCurrentItem="True" SnapsToDevicePixels="True" TabStripPlacement="Left" TextOptions.TextHintingMode="Animated" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" Grid.IsSharedSizeScope="True" Loaded="TabControl_Loaded">
+                    <TabControl.Effect>
+                        <BlurEffect Radius="0"/>
+                    </TabControl.Effect>
+                    <TabItem Header="{DynamicResource tabFavorites}" Uid="favorite" Controls:ControlsHelper.ContentCharacterCasing="Lower" 
+                             Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" Cursor="Hand">
+                        <Grid Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer Cursor="Arrow">
+                                <WrapPanel x:Name="Favorite_Radio_Wrap"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="All" Uid="all" Controls:ControlsHelper.ContentCharacterCasing="Lower" Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" Cursor="Hand">
+                        <Grid Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer Cursor="Arrow">
+                                <WrapPanel x:Name="All_Radio_Wrap"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Controls:ControlsHelper.ContentCharacterCasing="Lower" Uid="rock" Header="{DynamicResource tabRock}" Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" Cursor="Hand">
+                        <Grid Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer Cursor="Arrow">
+                                <WrapPanel x:Name="Rock_Radio_Wrap"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Controls:ControlsHelper.ContentCharacterCasing="Lower" Uid="club" Header="{DynamicResource tabClub}" Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" Cursor="Hand">
+                        <Grid Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer Margin="0" Cursor="Arrow">
+                                <WrapPanel x:Name="Club_Radio_Wrap"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Controls:ControlsHelper.ContentCharacterCasing="Lower" Uid="deephouse" Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" Cursor="Hand" Header="{DynamicResource tabDeepHouse}">
+                        <Grid Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer Margin="0" Cursor="Arrow">
+                                <WrapPanel x:Name="Deephouse_Radio_Wrap"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Controls:ControlsHelper.ContentCharacterCasing="Lower" Uid="shanson" Header="{DynamicResource tabShanson}" Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" Cursor="Hand">
+                        <Grid Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer Margin="0" Cursor="Arrow">
+                                <WrapPanel x:Name="Shanson_Radio_Wrap"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Controls:ControlsHelper.ContentCharacterCasing="Lower" Uid="trance" Header="{DynamicResource tabTrance}" Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" Cursor="Hand">
+                        <Grid Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer Margin="0" Cursor="Arrow">
+                                <WrapPanel x:Name="Trance_Radio_Wrap"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Controls:ControlsHelper.ContentCharacterCasing="Lower" Uid="pop" Header="{DynamicResource tabPop}" Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" Cursor="Hand">
+                        <Grid Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer Margin="0" Cursor="Arrow">
+                                <WrapPanel x:Name="Pop_Radio_Wrap"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Controls:ControlsHelper.ContentCharacterCasing="Lower" Uid="retro" Header="{DynamicResource tabRetro}" Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" Cursor="Hand">
+                        <Grid Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer Margin="0" Cursor="Arrow">
+                                <WrapPanel x:Name="Retro_Radio_Wrap"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Controls:ControlsHelper.ContentCharacterCasing="Lower" Uid="relax" Header="{DynamicResource tabRelax}" Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" Cursor="Hand">
+                        <Grid Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer Margin="0" Cursor="Arrow">
+                                <WrapPanel x:Name="Relax_Radio_Wrap"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Controls:ControlsHelper.ContentCharacterCasing="Lower" Uid="rap" Header="{DynamicResource tabRap}" Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" Cursor="Hand">
+                        <Grid Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer Margin="0" Cursor="Arrow">
+                                <WrapPanel x:Name="Rap_Radio_Wrap"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Controls:ControlsHelper.ContentCharacterCasing="Lower" Uid="talk" Header="{DynamicResource tabTalk}" Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" Cursor="Hand">
+                        <Grid Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer Margin="0" Cursor="Arrow">
+                                <WrapPanel x:Name="Talk_Radio_Wrap"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Controls:ControlsHelper.ContentCharacterCasing="Lower" Uid="folk" Header="{DynamicResource tabFolk}" Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" Cursor="Hand">
+                        <Grid Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer Margin="0" Cursor="Arrow">
+                                <WrapPanel x:Name="Folk_Radio_Wrap"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Controls:ControlsHelper.ContentCharacterCasing="Lower" Uid="classic" Header="{DynamicResource tabClassic}" Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" Cursor="Hand">
+                        <Grid Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer Margin="0" Cursor="Arrow">
+                                <WrapPanel x:Name="Classic_Radio_Wrap"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Controls:ControlsHelper.ContentCharacterCasing="Lower" Uid="jazz" Header="{DynamicResource tabJazz}" Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" Cursor="Hand">
+                        <Grid Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer Margin="0" Cursor="Arrow">
+                                <WrapPanel x:Name="Jazz_Radio_Wrap"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Controls:ControlsHelper.ContentCharacterCasing="Lower" Uid="kids" Header="{DynamicResource tabBaby}" Controls:ControlsHelper.HeaderFontFamily="Segoe UI Light" Cursor="Hand">
+                        <Grid Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer Margin="0" Cursor="Arrow">
+                                <WrapPanel x:Name="Kids_Radio_Wrap"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+            <Grid x:Name="player" Margin="0" MaxHeight="75" VerticalAlignment="Bottom" Height="73" Panel.ZIndex="57" MinHeight="60" Grid.ColumnSpan="2" RenderTransformOrigin="0.677,0.507" Background="{DynamicResource BottomGradient}">
+                <Grid Width="60" Height="60" RenderTransformOrigin="0.483,0.683" HorizontalAlignment="Left" Margin="18,7,0,6">
+                    <Rectangle x:Name="CoverStation" RadiusX="20" RadiusY="20"
+                            Width="60"
+                            Height="60" PreviewMouseLeftButtonDown="CoverStation_PreviewMouseLeftButtonDown" Cursor="Hand">
+                        <Rectangle.Fill>
+                            <ImageBrush x:Name="StationCoverImage" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Grid>
+                <UniformGrid x:Name="PlayerButtons" Margin="91,17,0,18" Columns="6" HorizontalAlignment="Left" Width="274">
+                    <Image x:Name="PreviousRadio" OpacityMask="#FFFB0000" Source="Resources/Icons/pl_next.png" Stretch="Fill" Opacity="0.6" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" RenderTransformOrigin="0.5,0.5" Margin="4,2,12,0" PreviewMouseLeftButtonDown="PreviousRadio_PreviewMouseLeftButtonDown" Width="30">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                <SkewTransform AngleY="0" AngleX="0"/>
+                                <RotateTransform Angle="0"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image x:Name="PlayPause" OpacityMask="#FFF30000" Source="Resources/Icons/pl_play.png" Opacity="0.6" Stretch="Fill" Cursor="Hand" RenderTransformOrigin="0.925,0.371" Margin="8,1,11,1" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" PreviewMouseLeftButtonDown="PlayPause_PreviewMouseLeftButtonDown" Width="30"/>
+                    <Image x:Name="NextRadio" OpacityMask="#FFFB0000" Source="Resources/Icons/pl_next.png" Stretch="Fill" Opacity="0.6" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" Margin="6,0,10,0" PreviewMouseLeftButtonDown="NextRadio_PreviewMouseLeftButtonDown" Width="30"/>
+                    <Image x:Name="ShuffleStation" OpacityMask="#FFFB0000" Source="Resources/Icons/pl_shuffle.png" Stretch="Fill" Opacity="0.6" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" Margin="6,1,9,0" PreviewMouseLeftButtonDown="ShuffleStation_PreviewMouseLeftButtonDown" Height="38" Width="30"/>
+                    <Image x:Name="RefreshStream" OpacityMask="#FFFB0000" Source="Resources/Icons/pl_refresh.png" Stretch="Fill" Opacity="0.6" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" Margin="4,0,5,0" Width="30" Height="30" PreviewMouseLeftButtonDown="RefreshStream_PreviewMouseLeftButtonDown" IsEnabled="False"/>
+                    <Image x:Name="FavoriteRadioButton" OpacityMask="#FFFB0000" Source="Resources/Icons/pl_star.png" Stretch="Fill" Opacity="0.6" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" Margin="8,0,5,0" Width="34" Height="34" PreviewMouseLeftButtonDown="FavoriteRadioButton_PreviewMouseLeftButtonDown" IsEnabled="False"/>
+                </UniformGrid>
+                <Grid x:Name="PlayGrid" Height="73" Margin="361,1,0,-1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="714">
+                    <Slider x:Name="VolumeSlider" HorizontalAlignment="Left" Width="59" BorderBrush="White" Foreground="#FFE21F1F" Controls:SliderHelper.TrackValueFillBrush="{DynamicResource GeneralColor}" Value="7" Controls:SliderHelper.TrackFillBrush="#FFC7CED4" Cursor="Hand" Controls:SliderHelper.TrackValueFillHoverBrush="#CCFFFFFF" Controls:SliderHelper.ThumbFillPressedBrush="#FF7F7F7F" Controls:SliderHelper.TrackFillPressedBrush="#FFE4E4E4" Controls:SliderHelper.TrackValueFillPressedBrush="#CCE4E4E4" Opacity="0.6" RenderTransformOrigin="1,0.909" Margin="1,3,0,5" Background="{x:Null}" Orientation="Vertical" Controls:SliderHelper.ThumbFillBrush="{DynamicResource GeneralColor}" Controls:SliderHelper.ChangeValueBy="LargeChange" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Controls:SliderHelper.ThumbFillHoverBrush="{DynamicResource GeneralColor}" Controls:SliderHelper.ThumbFillDisabledBrush="{x:Null}" Controls:SliderHelper.TrackFillDisabledBrush="{x:Null}" Controls:SliderHelper.TrackFillHoverBrush="{DynamicResource GeneralColor}" PreviewMouseWheel="Slider_PreviewMouseWheel" ValueChanged="VolumeSlider_ValueChanged" Maximum="10" FontSize="14" LargeChange="0"/>
+                    <Label Content="битрейт" HorizontalAlignment="Left" Margin="65,-5,0,55" FontSize="10" Foreground="#FF8B8B8B" Width="75" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <Button x:Name="FirstQualityButton" Content="-" HorizontalAlignment="Left" Margin="65,15,0,33" Width="75" FontFamily="Segoe UI Light" FontSize="12" Padding="5,2,5,0" Foreground="#FF2F3334" Background="White" BorderBrush="{x:Null}" PreviewMouseLeftButtonDown="FirstQualityButton_PreviewMouseLeftButtonDown" Cursor="Hand" Controls:ControlsHelper.FocusBorderBrush="{DynamicResource GeneralColor}" IsEnabled="False"/>
+                    <Button x:Name="SecondQualityButton" Content="-" HorizontalAlignment="Left" Margin="65,45,0,3" Width="75" FontFamily="Segoe UI Light" FontSize="12" Padding="5,2,5,0" BorderBrush="{x:Null}" Foreground="#FF2F3334" PreviewMouseLeftButtonDown="SecondQualityButton_PreviewMouseLeftButtonDown" Cursor="Hand" Controls:ControlsHelper.FocusBorderBrush="{DynamicResource GeneralColor}" IsEnabled="False"/>
+
+                    <Label x:Name="StationWhoPlayLabel" Content="{DynamicResource SelectStation}" Margin="149,5,0,34" FontSize="18" Padding="5,5,5,0" Foreground="#FF323232" PreviewMouseLeftButtonDown="StationWhoPlayLabel_PreviewMouseLeftButtonDown" Cursor="Hand" HorizontalAlignment="Left" Width="565" MouseEnter="StationWhoPlayLabel_MouseEnter" MouseLeave="StationWhoPlayLabel_MouseLeave"/>
+                    <WrapPanel HorizontalAlignment="Left" Height="35" Margin="164,34,0,0" VerticalAlignment="Top" Width="545">
+                        <Label x:Name="StationJanre" Content="" FontSize="14" Padding="5,0" Foreground="#FF323232" Cursor="" HorizontalAlignment="Left" Height="34" VerticalContentAlignment="Center"/>
+                        <Label x:Name="StationNameLabel" Content="" FontSize="14" Padding="0,0,5,0" Foreground="#FF323232" Cursor="" HorizontalAlignment="Left" Background="{x:Null}" VerticalContentAlignment="Center"/>
+                    </WrapPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Border x:Name="SearchBox" CornerRadius="17" BorderThickness="1" UseLayoutRounding="True" Grid.ColumnSpan="2" Margin="25,30,25,100" Background="#FFFBFBFB" ScrollViewer.VerticalScrollBarVisibility="Auto" Visibility="Hidden">
+            <Border.Effect>
+                <DropShadowEffect Color="#FFC9C0C0" Direction="662" ShadowDepth="14" BlurRadius="17" Opacity="0.87" RenderingBias="Quality"/>
+            </Border.Effect>
+            <Grid>
+                <Label Content="{DynamicResource SearchRadiostation}" Margin="14,3,7,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="22" FontFamily="Segoe UI Light" Padding="5,1,5,2" Foreground="{DynamicResource GeneralColor}" Height="31" VerticalAlignment="Top"/>
+                <TextBox x:Name="SearchTextBox" Height="34" Margin="14,30,7,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{DynamicResource GeneralColorOpacity}" CaretBrush="{x:Null}" SelectionBrush="#FFD6D6D6" Foreground="#FF403F3F" FontFamily="Segoe UI Light" FontSize="20" Padding="0,0,0,-2" Controls:TextBoxHelper.Watermark="{DynamicResource SearchRadiostationTextBox}" BorderThickness="0,0,0,1" Controls:ControlsHelper.MouseOverBorderBrush="{DynamicResource GeneralColor}" Controls:ControlsHelper.FocusBorderBrush="{DynamicResource GeneralColor}" Controls:ControlsHelper.FocusBorderThickness="0" UseLayoutRounding="False" Controls:TextBoxHelper.IsSpellCheckContextMenuEnabled="False" Controls:TextBoxHelper.WatermarkAlignment="Center" Controls:TextBoxHelper.WatermarkWrapping="Wrap" TextChanged="SearchTextBox_TextChanged"/>
+                <ScrollViewer Margin="9,69,7,18" Cursor="Arrow">
+                    <WrapPanel x:Name="Search_WrapPanel" />
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
+
+
+</Controls:MetroWindow>

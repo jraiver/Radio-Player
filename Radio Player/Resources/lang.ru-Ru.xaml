@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    >
+    
+    <v:String x:Key="SearchVK">Найти трек ВКонтакте</v:String>
+    <v:String x:Key="Search">Поиск</v:String>
+    <v:String x:Key="SearchRadiostation">Поиск радиостанции</v:String>
+    <v:String x:Key="SearchRadiostationTextBox">Введите название радиостанции</v:String>
+    <v:String x:Key="Delete">Удалить</v:String>
+    <v:String x:Key="ToFavorite">Добавить</v:String>
+    <v:String x:Key="CantTrack">Определение песен для данной радиостанции недоступно</v:String>
+    <v:String x:Key="SelectStation">Выберите радиостанцию</v:String>
+    <v:String x:Key="SelectLang">Выбрать язык</v:String>
+    
+    <!--tab control-->
+    <v:String x:Key="tabFavorites">Избранные</v:String>
+    <v:String x:Key="tabAll">Все</v:String>
+    <v:String x:Key="tabRock">Рок</v:String>
+    <v:String x:Key="tabClub">Клубные</v:String>
+    <v:String x:Key="tabDeepHouse">Deep House</v:String>
+    <v:String x:Key="tabShanson">Шансон</v:String>
+    <v:String x:Key="tabTrance">Транс</v:String>
+    <v:String x:Key="tabPop">Поп</v:String>
+    <v:String x:Key="tabRetro">Ретро</v:String>
+    <v:String x:Key="tabRelax">Релакс</v:String>
+    <v:String x:Key="tabRap">Рэп</v:String>
+    <v:String x:Key="tabTalk">Разговорное</v:String>
+    <v:String x:Key="tabFolk">Фолк</v:String>
+    <v:String x:Key="tabClassic">Класика</v:String>
+    <v:String x:Key="tabJazz">Джаз</v:String>
+    <v:String x:Key="tabBaby">Детское</v:String>
+    
+</ResourceDictionary>
